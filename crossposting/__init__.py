@@ -1,9 +1,9 @@
 from flask import Flask
-app = Flask(__name__)
 
-import crossposting.views
+def create_app():
+    app = Flask(__name__)
 
-#def create_app(config_name):
-#    app = Flask(__name__)
-#    app.config.from_object(app_config[config_name])
-#    return app
+    from .index import index as index_blueprint
+    app.register_blueprint(index_blueprint, url_prefix='/')
+
+    return app
