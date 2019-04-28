@@ -20,4 +20,7 @@ def create_app(config_name):
     from .index import index as index_blueprint
     app.register_blueprint(index_blueprint, url_prefix='/')
 
+    from .crud_forms import crud_forms as crud_forms_blueprint
+    app.register_blueprint(crud_forms_blueprint, url_prefix='/channels')
+
     return app
