@@ -1,8 +1,87 @@
-from flask import render_template
-
+from flask import flash, render_template
+from .forms import ChannelsForm
+from .. import db
+from ..models import Channel
 from . import index
 
 
-@index.route('/')
-def homepage():
-    return render_template('index.html')
+#@index.route('/')
+#def homepage():
+#    return render_template('index.html')
+
+
+@index.route('/', methods=['GET', 'POST'])
+def list_channels():
+    """
+    List all channels
+    """
+    channels = Channel.query.all()
+
+    try:
+        return render_template('channels/channels.html', channels=channels, title="Channels")
+    except:
+        abort(404)
+
+
+@index.route('/add', methods=['GET', 'POST'])
+def add_channel():
+    """
+    Add a channel to the database
+    """
+    add_channel = True
+
+    form = ChannelsForm()
+    if form:
+    #if form.is_submitted():
+#        channels = Channel(name=form.name.data)
+        channels = Channel(name='lol')
+       # try:
+       #     # add channel to the database
+       #     db.session.add(channels)
+       #     db.session.commit()
+       #     flash('You have successfully added a new chanel.')
+       # except:
+       #     flash('Error: channel name already exists.')
+       # return redirect(url_for('index.list_channels'))
+
+    return render_template('channels/channel.html', action="Add", add_channel=add_channel, form=form, title="Add Channel")
+    #return render_template('channels/channel.html', action="Add", add_channel=add_channel, title="Add Channel")
+
+
+@index.route('/edit/<int:id>', methods=['GET', 'POST'])
+def edit_channel(id):
+    """
+    Edit a channel
+    """
+    add_channel = False
+
+    channels = Channel.query.get_or_404(id)
+    form = ChannelsForm(obj=channel)
+    if form.validate_on_submit():
+        channels.name = form.name.data
+        db.session.commit()
+        flash('You have successfully edited the channel.')
+
+        # redirect to the channels page
+        return redirect(url_for('index.list_channels'))
+
+    form.name.data = channels.name
+    return render_template('channels/channel.html', action="Edit",
+                           add_channel=add_channel, form=form,
+                           channels=channels, title="Edit Channel")
+
+
+@index.route('/delete/<int:id>', methods=['GET', 'POST'])
+def delete_channel(id):
+    """
+    Delete a department from the database
+    """
+    channels = Channel.query.get_or_404(id)
+    db.session.delete(channels)
+    db.session.commit()
+    flash('You have successfully deleted the channel.')
+
+    # redirect to the departments page
+    return redirect(url_for('index.list_channels'))
+
+    return render_template(title="Delete Channel")
