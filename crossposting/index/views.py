@@ -1,9 +1,8 @@
-from flask import flash, render_template
+from flask import abort, flash, redirect, render_template, url_for
+from . import index
 from .forms import ChannelsForm
 from .. import db
 from ..models import Channel
-from . import index
-
 
 #@index.route('/')
 #def homepage():
@@ -31,21 +30,18 @@ def add_channel():
     add_channel = True
 
     form = ChannelsForm()
-    if form:
-    #if form.is_submitted():
-#        channels = Channel(name=form.name.data)
-        channels = Channel(name='lol')
-       # try:
-       #     # add channel to the database
-       #     db.session.add(channels)
-       #     db.session.commit()
-       #     flash('You have successfully added a new chanel.')
-       # except:
-       #     flash('Error: channel name already exists.')
-       # return redirect(url_for('index.list_channels'))
+    if form.validate_on_submit():
+        channels = Channel(name=form.name.data)
+        try:
+            # add channel to the database
+            db.session.add(channels)
+            db.session.commit()
+            flash('You have successfully added a new chanel.')
+        except:
+            flash('Error: channel name already exists.')
+        return redirect(url_for('index.list_channels'))
 
     return render_template('channels/channel.html', action="Add", add_channel=add_channel, form=form, title="Add Channel")
-    #return render_template('channels/channel.html', action="Add", add_channel=add_channel, title="Add Channel")
 
 
 @index.route('/edit/<int:id>', methods=['GET', 'POST'])

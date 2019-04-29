@@ -7,7 +7,8 @@ class Post(db.Model):
     """
     __tablename__ = 'posts'
     id = db.Column(db.Integer, primary_key=True) 
-    cnannel_id =  db.relationship('Channel', backref='post', lazy='dynamic')
+    #cnannel_id =  db.relationship('Channel', backref='post', lazy='dynamic')
+    cnannel_id =  db.Column(db.Integer)
     header = db.Column(db.String)
     post = db.Column(db.Text)
     img_path = db.Column(db.String)
@@ -35,8 +36,9 @@ class Channel(db.Model):
     Create a channels' table
     """
     __tablename__ = 'channels'
-    id =  db.Column(db.Integer, db.ForeignKey('posts.id'), primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
+    #id =  db.Column(db.Integer, db.ForeignKey('posts.id'), primary_key=True)
+    id =  db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False, unique=True)
 
 
     def __init__(self, name):
