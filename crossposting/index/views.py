@@ -4,10 +4,6 @@ from .forms import ChannelsForm
 from .. import db
 from ..models import Channel
 
-#@index.route('/')
-#def homepage():
-#    return render_template('index.html')
-
 
 @index.route('/', methods=['GET', 'POST'])
 def list_channels():
@@ -52,7 +48,7 @@ def edit_channel(id):
     add_channel = False
 
     channels = Channel.query.get_or_404(id)
-    form = ChannelsForm(obj=channel)
+    form = ChannelsForm(obj=channels)
     if form.validate_on_submit():
         channels.name = form.name.data
         db.session.commit()
