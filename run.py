@@ -1,14 +1,9 @@
-from flask import Flask
-from flask import render_template
-app = Flask(__name__)
+from crossposting import create_app
+import os
 
-@app.route('/')
-def home():
-    return render_template('home.html')
-
+#config_name = os.getenv('FLASK_CONFIG')
+config_name = 'development'
+app = create_app(config_name)
 
 if __name__ == '__main__':
-    app.run(debug=True)
-
-#if __name__ == "__main__":
-#    app.run(host='0.0.0.0')
+    app.run()
