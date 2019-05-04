@@ -2,3 +2,4 @@ crosspostingenv
 __pycache__
 instance/config.py
 migrations
+.idea

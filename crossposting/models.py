@@ -39,6 +39,8 @@ class Channel(db.Model):
     #id =  db.Column(db.Integer, db.ForeignKey('posts.id'), primary_key=True)
     id =  db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False, unique=True)
+    chat_id = db.Column(db.String(50), nullable=False, unique=True)
+    is_active = db.Column(db.Boolean, default=0)
 
 
     def __init__(self, name):
