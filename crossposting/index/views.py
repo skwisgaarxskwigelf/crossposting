@@ -51,6 +51,8 @@ def edit_channel(id):
     form = ChannelsForm(obj=channels)
     if form.validate_on_submit():
         channels.name = form.name.data
+        channels.chat_id = form.chat_id.data
+        channels.is_active = form.is_active.data
         db.session.commit()
         flash('You have successfully edited the channel.')
 
