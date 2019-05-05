@@ -43,8 +43,10 @@ class Channel(db.Model):
     is_active = db.Column(db.Boolean, default=0)
 
 
-    def __init__(self, name):
+    def __init__(self, name, telegram_chat_id, is_active):
         self.name = name
+        self.telegram_chat_id = telegram_chat_id
+        self.is_active = is_active
 
 
     def __repr__(self):
