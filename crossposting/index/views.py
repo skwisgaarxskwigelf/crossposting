@@ -27,7 +27,8 @@ def add_channel():
 
     form = ChannelsForm()
     if form.validate_on_submit():
-        channels = Channel(name=form.name.data.strip())
+        channels = Channel(name=form.name.data.strip(), channel_id=form.channel_id.data.strip(),
+                           is_active=form.is_active.data)
         try:
             # add channel to the database
             db.session.add(channels)
@@ -37,7 +38,8 @@ def add_channel():
             flash('Error: channel name already exists.')
         return redirect(url_for('index.list_channels'))
 
-    return render_template('channels/channel.html', action="Add", add_channel=add_channel, form=form, title="Add Channel")
+    return render_template('channels/channel.html', action="Add", add_channel=add_channel,
+                           form=form, title="Add Channel")
 
 
 @index.route('/edit/<int:id>', methods=['GET', 'POST'])
