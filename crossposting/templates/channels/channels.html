@@ -27,7 +27,7 @@
                         {% for channel in channels %}
                         <tr>
                             <td> {{ channel.name }}</td>
-                            <td> {{ channel.chat_id }}</td>
+                            <td> {{ channel.telegram_chat_id }}</td>
                             <td> {{ channel.is_active }}</td>
                             <td>
                                 <a href="{{ url_for('index.edit_channel', id=channel.id) }}">

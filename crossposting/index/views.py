@@ -27,7 +27,7 @@ def add_channel():
 
     form = ChannelsForm()
     if form.validate_on_submit():
-        channels = Channel(name=form.name.data.strip(), channel_id=form.channel_id.data.strip(),
+        channels = Channel(name=form.name.data.strip(), telegram_chat_id=form.telegram_chat_id.data.strip(),
                            is_active=form.is_active.data)
         try:
             # add channel to the database
@@ -52,8 +52,8 @@ def edit_channel(id):
     channels = Channel.query.get_or_404(id)
     form = ChannelsForm(obj=channels)
     if form.validate_on_submit():
-        channels.name = form.name.data
-        channels.chat_id = form.chat_id.data
+        channels.name = form.name.data.strip()
+        channels.telegram_chat_id = form.telegram_chat_id.data.strip()
         channels.is_active = form.is_active.data
         db.session.commit()
         flash('You have successfully edited the channel.')
