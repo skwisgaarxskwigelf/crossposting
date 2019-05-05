@@ -7,8 +7,8 @@ class Post(db.Model):
     """
     __tablename__ = 'posts'
     id = db.Column(db.Integer, primary_key=True) 
-    #cnannel_id =  db.relationship('Channel', backref='post', lazy='dynamic')
-    cnannel_id =  db.Column(db.Integer)
+    #channel_id =  db.relationship('Channel', backref='post', lazy='dynamic')
+    channel_id =  db.Column(db.Integer)
     header = db.Column(db.String)
     post = db.Column(db.Text)
     img_path = db.Column(db.String)
@@ -39,10 +39,14 @@ class Channel(db.Model):
     #id =  db.Column(db.Integer, db.ForeignKey('posts.id'), primary_key=True)
     id =  db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False, unique=True)
+    telegram_chat_id = db.Column(db.String(50), nullable=False, unique=True)
+    is_active = db.Column(db.Boolean, default=0)
 
 
-    def __init__(self, name):
+    def __init__(self, name, telegram_chat_id, is_active):
         self.name = name
+        self.telegram_chat_id = telegram_chat_id
+        self.is_active = is_active
 
 
     def __repr__(self):
