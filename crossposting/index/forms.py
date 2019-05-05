@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, validators, ValidationError
+from wtforms import StringField, BooleanField, SubmitField, validators, ValidationError
 
 
 class ChannelsForm(FlaskForm):
