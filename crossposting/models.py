@@ -53,7 +53,7 @@ class Image(db.Model):
     """
     Create an images' table
     """
-    __tablename__ = 'imeages'
+    __tablename__ = 'images'
     id = db.Column(db.Integer, primary_key=True)
     img_tg_id = db.Column(db.Integer)
     post_tg_id = db.Column(db.Integer) 
