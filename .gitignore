@@ -1,4 +1,5 @@
 crosspostingenv
+venv
 __pycache__
 instance/config.py
 migrations

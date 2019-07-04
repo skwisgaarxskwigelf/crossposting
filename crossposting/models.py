@@ -7,28 +7,25 @@ class Post(db.Model):
     """
     __tablename__ = 'posts'
     id = db.Column(db.Integer, primary_key=True) 
-    #channel_id =  db.relationship('Channel', backref='post', lazy='dynamic')
+    post_tg_id = db.Column(db.Integer)
     channel_id =  db.Column(db.Integer)
-    header = db.Column(db.String)
     post = db.Column(db.Text)
-    img_path = db.Column(db.String)
-    img_date = db.Column(db.DateTime)
-    post_date = db.Column(db.DateTime)
+    is_img = db.Column(db.Boolean) 
+    post_date = db.Column(db.Float)
     sent = db.Column(db.Boolean, default=0)
 
 
-    def __init__(self, channel_id, header, post, img_path, img_date, post_date, sent):
+    def __init__(self, post_tg_id, channel_id, post, is_img, post_date, sent):
+        self.post_tg_id = post_tg_id
         self.channel_id = channel_id
-        self.header = header
         self.post = post
-        self.img_path = img_path
-        self.img_date = img_date
+        self.is_img = is_img
         self.post_date = post_date
         self.sent = sent
 
 
     def __repr__(self):
-        return '<id {}>'.format(self.id) 
+        return '<tg id {}>'.format(self.post_tg_id) 
 
 
 class Channel(db.Model):
@@ -36,8 +33,7 @@ class Channel(db.Model):
     Create a channels' table
     """
     __tablename__ = 'channels'
-    #id =  db.Column(db.Integer, db.ForeignKey('posts.id'), primary_key=True)
-    id =  db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False, unique=True)
     telegram_chat_id = db.Column(db.String(50), nullable=False, unique=True)
     is_active = db.Column(db.Boolean, default=0)
@@ -51,3 +47,22 @@ class Channel(db.Model):
 
     def __repr__(self):
        return '<name {}>'.format(self.name)
+
+
+class Image(db.Model):
+    """
+    Create an images' table
+    """
+    __tablename__ = 'imeages'
+    id = db.Column(db.Integer, primary_key=True)
+    img_tg_id = db.Column(db.Integer)
+    post_tg_id = db.Column(db.Integer) 
+
+
+    def __init__(self, img_tg_id, post_tg_id):
+        self.img_tg_id = img_tg_id
+        self.post_tg_id = post_tg_id
+
+
+    def __repr__(self):
+        return '<tg id {}>'.format(self.img_tg_id)
