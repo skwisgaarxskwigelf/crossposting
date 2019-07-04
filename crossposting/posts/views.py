@@ -4,7 +4,7 @@ from ..models import Post
 from .. import db
 
 
-@posts_page.route('/posts', methods=['GET', 'POST'])
+@posts_page.route('/', methods=['GET', 'POST'])
 def list_posts():
     """
     List all posts
@@ -17,7 +17,7 @@ def list_posts():
         abort(404)
 
 
-@posts_page.route('/posts/delete/<int:id>', methods=['GET', 'POST'])
+@posts_page.route('/delete/<int:id>', methods=['GET', 'POST'])
 def delete_post(id):
     """
     Delete a post from the database
