@@ -16,12 +16,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand topnav" href="">Tomara Project</a>
+            <a class="navbar-brand topnav" href="{{ url_for('index.list_channels') }}">Tomara Project</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="">Channels</a></li>
-                <li><a href="">Posts</a></li>
+                <li><a href="{{ url_for('index.list_channels') }}">Channels</a></li>
+                <li><a href="{{ url_for('posts_page.list_posts') }}">Posts</a></li>
             </ul>
         </div>
     </div>
