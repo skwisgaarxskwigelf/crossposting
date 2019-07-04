@@ -70,14 +70,14 @@ def edit_channel(id):
 @index.route('/delete/<int:id>', methods=['GET', 'POST'])
 def delete_channel(id):
     """
-    Delete a department from the database
+    Delete a channel from the database
     """
     channels = Channel.query.get_or_404(id)
     db.session.delete(channels)
     db.session.commit()
     flash('You have successfully deleted the channel.')
 
-    # redirect to the departments page
+    # redirect to the channels page
     return redirect(url_for('index.list_channels'))
 
     return render_template(title="Delete Channel")

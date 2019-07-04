@@ -1,5 +1,5 @@
 from flask import Blueprint
 
-index = Blueprint('index', __name__)
+posts_page = Blueprint('posts_page', __name__)
 
 from . import views
