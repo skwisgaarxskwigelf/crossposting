@@ -17,7 +17,8 @@
                         <thead>
                         <tr>
                             <th width="15%">Name</th>
-                            <th width="40%">Channel Id</th>
+                            <th width="40%">Telegram Id</th>
+                            <th width="40%">Vk Id</th>
                             <th width="15%">Is Active</th>
                             <th width="15%">Edit</th>
                             <th width="15%">Delete</th>
@@ -28,6 +29,7 @@
                         <tr>
                             <td>{{ channel.name }}</td>
                             <td>{{ channel.telegram_chat_id }}</td>
+                            <td>{{ channel.vk_id }}</td>
                             <td>{{ channel.is_active }}</td>
                             <td>
                                 <a href="{{ url_for('index.edit_channel', id=channel.id) }}">
