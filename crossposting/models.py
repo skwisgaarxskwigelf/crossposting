@@ -9,35 +9,35 @@ class Post(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     channel_id = db.Column(db.Integer)
-    post_tg_id = db.Column(db.Integer, unique=True)
-    post = db.Column(db.Text, default='')
-    is_img = db.Column(db.Boolean, default=0)
+    tg_id = db.Column(db.Integer, unique=True)
+    message = db.Column(db.Text, default='')
+    is_photo = db.Column(db.Boolean, default=0)
     is_document = db.Column(db.Boolean, default=0)
     is_web_preview = db.Column(db.Boolean, default=0)
     is_video = db.Column(db.Boolean, default=0)
     is_gif = db.Column(db.Boolean, default=0)
     is_pole = db.Column(db.Boolean, default=0)
     grouped_id = db.Column(db.Integer, default=0)
-    post_date = db.Column(db.Float)
+    date = db.Column(db.Float)
     sent = db.Column(db.Boolean, default=0)
 
-    def __init__(self, channel_id, post_tg_id, post, is_img, is_document, is_web_preview, is_video, is_gif, is_pole,
-                 grouped_id, post_date, sent):
+    def __init__(self, channel_id, tg_id, message, is_photo, is_document, is_web_preview, is_video, is_gif, is_pole,
+                 grouped_id, date, sent):
         self.channel_id = channel_id
-        self.post_tg_id = post_tg_id
-        self.post = post
-        self.is_img = is_img
+        self.tg_id = tg_id
+        self.message = message
+        self.is_photo = is_photo
         self.is_document = is_document
         self.is_web_preview = is_web_preview
         self.is_video = is_video
         self.is_gif = is_gif
         self.is_pole = is_pole
         self.grouped_id = grouped_id
-        self.post_date = post_date
+        self.date = date
         self.sent = sent
 
     def __repr__(self):
-        return '<tg id {}>'.format(self.post_tg_id)
+        return '<tg id {}>'.format(self.tg_id)
 
 
 class Channel(db.Model):
@@ -69,17 +69,17 @@ class Image(db.Model):
     __tablename__ = 'images'
 
     id = db.Column(db.Integer, primary_key=True)
-    post_tg_id = db.Column(db.Integer)
-    img_tg_id = db.Column(db.Integer, unique=True)
+    message_tg_id = db.Column(db.Integer)
+    tg_id = db.Column(db.Integer, unique=True)
     grouped_id = db.Column(db.Integer, default=0)
 
-    def __init__(self, post_tg_id, img_tg_id, grouped_id):
-        self.post_tg_id = post_tg_id
-        self.img_tg_id = img_tg_id
+    def __init__(self, message_tg_id, tg_id, grouped_id):
+        self.message_tg_id = message_tg_id
+        self.img_tg_id = tg_id
         self.grouped_id = grouped_id
 
     def __repr__(self):
-        return '<tg id {}>'.format(self.img_tg_id)
+        return '<tg id {}>'.format(self.tg_id)
 
 
 class Document(db.Model):
@@ -89,37 +89,37 @@ class Document(db.Model):
     __tablename__ = 'documents'
 
     id = db.Column(db.Integer, primary_key=True)
-    post_tg_id = db.Column(db.Integer)
-    doc_tg_id = db.Column(db.Integer, unique=True)
+    message_tg_id = db.Column(db.Integer)
+    tg_id = db.Column(db.Integer, unique=True)
     grouped_id = db.Column(db.Integer, default=0)
 
-    def __init__(self, post_tg_id, doc_tg_id, grouped_id):
-        self.post_tg_id = post_tg_id
-        self.doc_tg_id = doc_tg_id
+    def __init__(self, message_tg_id, tg_id, grouped_id):
+        self.message_tg_id = message_tg_id
+        self.tg_id = tg_id
         self.grouped_id = grouped_id
 
     def __repr__(self):
-        return '<tg id {}>'.format(self.doc_tg_id)
+        return '<tg id {}>'.format(self.tg_id)
 
 
 class WebPreview(db.Model):
     """
     Create an web previews' table
     """
-    __tablename__ = 'web_preview'
+    __tablename__ = 'web_previews'
 
     id = db.Column(db.Integer, primary_key=True)
-    post_tg_id = db.Column(db.Integer)
-    web_preview_tg_id = db.Column(db.Integer, unique=True)
+    message_tg_id = db.Column(db.Integer)
+    tg_id = db.Column(db.Integer, unique=True)
     grouped_id = db.Column(db.Integer, default=0)
 
-    def __init__(self, post_tg_id, web_preview_tg_id, grouped_id):
-        self.post_tg_id = post_tg_id
-        self.web_preview_tg_id = web_preview_tg_id
+    def __init__(self, message_tg_id, tg_id, grouped_id):
+        self.message_tg_id = message_tg_id
+        self.tg_id = tg_id
         self.grouped_id = grouped_id
 
     def __repr__(self):
-        return '<tg id {}>'.format(self.web_preview_tg_id)
+        return '<tg id {}>'.format(self.tg_id)
 
 
 class Video(db.Model):
@@ -129,17 +129,17 @@ class Video(db.Model):
     __tablename__ = 'videos'
 
     id = db.Column(db.Integer, primary_key=True)
-    post_tg_id = db.Column(db.Integer)
-    video_tg_id = db.Column(db.Integer, unique=True)
+    message_tg_id = db.Column(db.Integer)
+    tg_id = db.Column(db.Integer, unique=True)
     grouped_id = db.Column(db.Integer, default=0)
 
-    def __init__(self, post_tg_id, video_tg_id, grouped_id):
-        self.post_tg_id = post_tg_id
-        self.video_tg_id = video_tg_id
+    def __init__(self, message_tg_id, tg_id, grouped_id):
+        self.message_tg_id = message_tg_id
+        self.tg_id = tg_id
         self.grouped_id = grouped_id
 
     def __repr__(self):
-        return '<tg id {}>'.format(self.video_tg_id)
+        return '<tg id {}>'.format(self.tg_id)
 
 
 class Gif(db.Model):
@@ -149,17 +149,17 @@ class Gif(db.Model):
     __tablename__ = 'gifs'
 
     id = db.Column(db.Integer, primary_key=True)
-    post_tg_id = db.Column(db.Integer)
-    gif_tg_id = db.Column(db.Integer, unique=True)
+    message_tg_id = db.Column(db.Integer)
+    tg_id = db.Column(db.Integer, unique=True)
     grouped_id = db.Column(db.Integer, default=0)
 
-    def __init__(self, post_tg_id, gif_tg_id, grouped_id):
-        self.post_tg_id = post_tg_id
-        self.gif_tg_id = gif_tg_id
+    def __init__(self, message_tg_id, tg_id, grouped_id):
+        self.message_tg_id = message_tg_id
+        self.tg_id = tg_id
         self.grouped_id = grouped_id
 
     def __repr__(self):
-        return '<tg id {}>'.format(self.gif_tg_id)
+        return '<tg id {}>'.format(self.tg_id)
 
 
 class Pole(db.Model):
@@ -169,14 +169,14 @@ class Pole(db.Model):
     __tablename__ = 'poles'
 
     id = db.Column(db.Integer, primary_key=True)
-    post_tg_id = db.Column(db.Integer)
-    pole_tg_id = db.Column(db.Integer, unique=True)
+    message_tg_id = db.Column(db.Integer)
+    tg_id = db.Column(db.Integer, unique=True)
     grouped_id = db.Column(db.Integer, default=0)
 
-    def __init__(self, post_tg_id, pole_tg_id, grouped_id):
-        self.post_tg_id = post_tg_id
-        self.pole_tg_id = pole_tg_id
+    def __init__(self, message_tg_id, tg_id, grouped_id):
+        self.message_tg_id = message_tg_id
+        self.tg_id = tg_id
         self.grouped_id = grouped_id
 
     def __repr__(self):
-        return '<tg id {}>'.format(self.pole_tg_id)
+        return '<tg id {}>'.format(self.tg_id)

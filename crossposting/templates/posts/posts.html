@@ -19,7 +19,14 @@
                             <th width="10%">Channel Id</th>
                             <th width="10%">Telegram Id</th>
                             <th width="70%">Post</th>
-                            <th width="10%">Image(s)</th>
+                            <th width="10%">Photo(s)</th>
+                            <th width="10%">Document(s)</th>
+                            <th width="10%">Web preview(s)</th>
+                            <th width="10%">Video(s)</th>
+                            <th width="10%">Gif(s)</th>
+                            <th width="10%">Pole(s)</th>
+                            <th width="15%">Grouped Id</th>
+                            <th width="10%">Date</th>
                             <th width="10%">Sent</th>
                             <th width="10%">Delete</th>
                         </tr>
@@ -28,9 +35,16 @@
                         {% for post in posts %}
                         <tr>
                             <td>{{ post.channel_id }}</td>
-                            <td>{{ post.post_tg_id }}</td>
-                            <td>{{ post.post }}</td>
-                            <td>{{ post.is_img }}</td>
+                            <td>{{ post.tg_id }}</td>
+                            <td>{{ post.message }}</td>
+                            <td>{{ post.is_photo }}</td>
+                            <td>{{ post.is_document }}</td>
+                            <td>{{ post.is_web_preview }}</td>
+                            <td>{{ post.is_video }}</td>
+                            <td>{{ post.is_gif }}</td>
+                            <td>{{ post.is_pole }}</td>
+                            <td>{{ post.grouped_id }}</td>
+                            <td>{{ post.date }}</td>
                             <td>{{ post.sent }}</td>
                             <td>
                                 <a href="{{ url_for('posts_page.delete_post', id=post.id) }}">
