@@ -8,8 +8,8 @@ class Post(db.Model):
     __tablename__ = 'posts'
 
     id = db.Column(db.Integer, primary_key=True)
-    channel_id = db.Column(db.Integer)
-    tg_id = db.Column(db.Integer, unique=True)
+    channel_id = db.Column(db.Integer, nullable=False)
+    tg_id = db.Column(db.Integer, nullable=False)
     message = db.Column(db.Text, default='')
     is_photo = db.Column(db.Boolean, default=0)
     is_document = db.Column(db.Boolean, default=0)
@@ -20,6 +20,7 @@ class Post(db.Model):
     grouped_id = db.Column(db.Integer, default=0)
     date = db.Column(db.Float)
     sent = db.Column(db.Boolean, default=0)
+    db.UniqueConstraint('channel_id', 'tg_id')
 
     def __init__(self, channel_id, tg_id, message, is_photo, is_document, is_web_preview, is_video, is_gif, is_pole,
                  grouped_id, date, sent):
