@@ -7,9 +7,9 @@ class Post(db.Model):
     """
     __tablename__ = 'posts'
 
-    id = db.Column(db.Integer, primary_key=True)
-    channel_id = db.Column(db.Integer)
-    tg_id = db.Column(db.Integer, unique=True)
+    id = db.Column(db.BigInteger, primary_key=True)
+    channel_id = db.Column(db.Integer, nullable=False)
+    tg_id = db.Column(db.Integer, nullable=False)
     message = db.Column(db.Text, default='')
     is_photo = db.Column(db.Boolean, default=0)
     is_document = db.Column(db.Boolean, default=0)
@@ -17,9 +17,10 @@ class Post(db.Model):
     is_video = db.Column(db.Boolean, default=0)
     is_gif = db.Column(db.Boolean, default=0)
     is_pole = db.Column(db.Boolean, default=0)
-    grouped_id = db.Column(db.Integer, default=0)
+    grouped_id = db.Column(db.BigInteger, default=0)
     date = db.Column(db.Float)
     sent = db.Column(db.Boolean, default=0)
+    db.UniqueConstraint('channel_id', 'tg_id')
 
     def __init__(self, channel_id, tg_id, message, is_photo, is_document, is_web_preview, is_video, is_gif, is_pole,
                  grouped_id, date, sent):
@@ -46,7 +47,7 @@ class Channel(db.Model):
     """
     __tablename__ = 'channels'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.BigInteger, primary_key=True)
     name = db.Column(db.String(50), unique=True)
     telegram_chat_id = db.Column(db.String(50), nullable=False, unique=True)
     vk_id = db.Column(db.String(50))
@@ -68,10 +69,10 @@ class Photo(db.Model):
     """
     __tablename__ = 'photos'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.BigInteger, primary_key=True)
     message_tg_id = db.Column(db.Integer)
-    tg_id = db.Column(db.Integer, unique=True)
-    grouped_id = db.Column(db.Integer, default=0)
+    tg_id = db.Column(db.BigInteger, unique=True)
+    grouped_id = db.Column(db.BigInteger, default=0)
 
     def __init__(self, message_tg_id, tg_id, grouped_id):
         self.message_tg_id = message_tg_id
@@ -88,10 +89,10 @@ class Document(db.Model):
     """
     __tablename__ = 'documents'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.BigInteger, primary_key=True)
     message_tg_id = db.Column(db.Integer)
-    tg_id = db.Column(db.Integer, unique=True)
-    grouped_id = db.Column(db.Integer, default=0)
+    tg_id = db.Column(db.BigInteger, unique=True)
+    grouped_id = db.Column(db.BigInteger, default=0)
 
     def __init__(self, message_tg_id, tg_id, grouped_id):
         self.message_tg_id = message_tg_id
@@ -108,10 +109,10 @@ class WebPreview(db.Model):
     """
     __tablename__ = 'web_previews'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.BigInteger, primary_key=True)
     message_tg_id = db.Column(db.Integer)
-    tg_id = db.Column(db.Integer, unique=True)
-    grouped_id = db.Column(db.Integer, default=0)
+    tg_id = db.Column(db.BigInteger, unique=True)
+    grouped_id = db.Column(db.BigInteger, default=0)
 
     def __init__(self, message_tg_id, tg_id, grouped_id):
         self.message_tg_id = message_tg_id
@@ -128,10 +129,10 @@ class Video(db.Model):
     """
     __tablename__ = 'videos'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.BigInteger, primary_key=True)
     message_tg_id = db.Column(db.Integer)
-    tg_id = db.Column(db.Integer, unique=True)
-    grouped_id = db.Column(db.Integer, default=0)
+    tg_id = db.Column(db.BigInteger, unique=True)
+    grouped_id = db.Column(db.BigInteger, default=0)
 
     def __init__(self, message_tg_id, tg_id, grouped_id):
         self.message_tg_id = message_tg_id
@@ -148,10 +149,10 @@ class Gif(db.Model):
     """
     __tablename__ = 'gifs'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.BigInteger, primary_key=True)
     message_tg_id = db.Column(db.Integer)
-    tg_id = db.Column(db.Integer, unique=True)
-    grouped_id = db.Column(db.Integer, default=0)
+    tg_id = db.Column(db.BigInteger, unique=True)
+    grouped_id = db.Column(db.BigInteger, default=0)
 
     def __init__(self, message_tg_id, tg_id, grouped_id):
         self.message_tg_id = message_tg_id
@@ -168,10 +169,10 @@ class Pole(db.Model):
     """
     __tablename__ = 'poles'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.BigInteger, primary_key=True)
     message_tg_id = db.Column(db.Integer)
-    tg_id = db.Column(db.Integer, unique=True)
-    grouped_id = db.Column(db.Integer, default=0)
+    tg_id = db.Column(db.BigInteger, unique=True)
+    grouped_id = db.Column(db.BigInteger, default=0)
 
     def __init__(self, message_tg_id, tg_id, grouped_id):
         self.message_tg_id = message_tg_id
