@@ -62,11 +62,11 @@ class Channel(db.Model):
         return '<telegram chat id {}>'.format(self.telegram_chat_id)
 
 
-class Image(db.Model):
+class Photo(db.Model):
     """
-    Create an images' table
+    Create an photos' table
     """
-    __tablename__ = 'images'
+    __tablename__ = 'photos'
 
     id = db.Column(db.Integer, primary_key=True)
     message_tg_id = db.Column(db.Integer)
