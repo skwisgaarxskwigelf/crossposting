@@ -48,6 +48,11 @@ p.copyright {
     padding: 10px;
 }
 
+.center-posts {
+    margin: auto;
+    padding: 25px;
+}
+
 .content-section {
     padding: 50px 0;
     border-top: 1px solid #e7e7e7;

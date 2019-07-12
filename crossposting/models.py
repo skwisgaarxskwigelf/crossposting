@@ -19,7 +19,7 @@ class Post(db.Model):
     is_pole = db.Column(db.Boolean, default=0)
     grouped_id = db.Column(db.BigInteger, default=0)
     date = db.Column(db.Float)
-    sent = db.Column(db.Boolean, default=0)
+    sent = db.Column(db.Boolean, default=False)
     db.UniqueConstraint('channel_id', 'tg_id')
 
     def __init__(self, channel_id, tg_id, message, is_photo, is_document, is_web_preview, is_video, is_gif, is_pole,
